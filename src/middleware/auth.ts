@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { UserRole } from '../models/Order.js';
+import { UserRole } from '../models/Order.ts';
 
 export interface AuthenticatedRequest extends Request {
   user?: {

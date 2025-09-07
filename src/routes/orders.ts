@@ -6,16 +6,51 @@ import { orderCreationLimiter } from '../middleware/ratelimiter.js';
 import { body, query, param, validationResult } from 'express-validator';
 import { cacheService } from '../services/cacheService.js';
 import { sql } from '../config/database.ts';
+import { v4 as uuidv4 } from 'uuid';
+
 
 const router = Router();
 
-// Validation middleware
+// // Validation middleware
+// const createOrderValidation = [
+//   body('items').isArray({ min: 1 }).withMessage('Items must be a non-empty array'),
+//   body('items.*.sku').isString().notEmpty().withMessage('SKU is required'),
+//   body('items.*.quantity').isInt({ min: 1 }).withMessage('Quantity must be positive'),
+//   body('items.*.price').isInt({ min: 0 }).withMessage('Price must be non-negative'),
+//   body('client_token').isString().notEmpty().withMessage('Client token is required')
+// ];
+
 const createOrderValidation = [
-  body('items').isArray({ min: 1 }).withMessage('Items must be a non-empty array'),
-  body('items.*.sku').isString().notEmpty().withMessage('SKU is required'),
-  body('items.*.quantity').isInt({ min: 1 }).withMessage('Quantity must be positive'),
-  body('items.*.price').isInt({ min: 0 }).withMessage('Price must be non-negative'),
-  body('client_token').isString().notEmpty().withMessage('Client token is required')
+  body('items')
+    .isArray({ min: 1 })
+    .withMessage('Items must be a non-empty array'),
+
+  body('items.*.sku')
+    .isString()
+    .notEmpty()
+    .withMessage('SKU is required'),
+
+  body('items.*.quantity')
+    .isInt({ min: 1 })
+    .withMessage('Quantity must be positive'),
+
+  body('items.*.price')
+    .isInt({ min: 0 })
+    .withMessage('Price must be non-negative'),
+
+  // client_token is optional
+  body('client_token')
+    .optional()
+    .isString()
+    .withMessage('Client token must be a string'),
+
+  // middleware to generate token if missing
+  (req: any, _res: any, next: any) => {
+    if (!req.body.client_token) {
+      req.body.client_token = uuidv4();
+    }
+    next();
+  }
 ];
 
 const updateStatusValidation = [
