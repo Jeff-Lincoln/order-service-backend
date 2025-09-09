@@ -20,7 +20,7 @@ const loginSchema = Joi.object({
   password: Joi.string().required()
 });
 
-router.post('/signup', async (req, res, next) => {
+router.post('/signup', async (req: any, res: any, next: any) => {
   try {
     const { error, value } = signupSchema.validate(req.body);
     if (error) {
