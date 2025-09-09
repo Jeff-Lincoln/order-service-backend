@@ -278,37 +278,3 @@ export interface ShippingAddress {
   phoneNumber?: string;
 }
 
-// Export types for convenience
-
-// export type { OrderItem, CreateOrderInput, UpdateOrderInput, OrderFilters };
-// // Database Models and Migrations
-
-// // src/models/Order.ts
-// export interface Order {
-//   id: string;
-//   user_id: string;
-//   items: OrderItem[];
-//   status: OrderStatus;
-//   client_token: string;
-//   total_amount: number;
-//   version: number;
-//   created_at: Date;
-//   updated_at: Date;
-// }
-
-// export interface OrderItem {
-//   sku: string;
-//   quantity: number;
-//   price: number;
-// }
-
-// export enum OrderStatus {
-//   PENDING = 'PENDING',
-//   PAID = 'PAID',
-//   CANCELLED = 'CANCELLED'
-// }
-
-// export enum UserRole {
-//   USER = 'USER',
-//   ADMIN = 'ADMIN'
-// }
