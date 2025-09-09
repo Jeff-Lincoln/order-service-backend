@@ -136,6 +136,17 @@ Failure scenario: Payment provider downtime → mitigate via retries + dead-lett
 ✅ Tests runnable with npm test
 
 ✅ .env.example provided (no real secrets)
+DATABASE_URL=
+JWT_SECRET=
+
+PORT=
+NODE_ENV=
+
+PGHOST=
+PGUSER=
+PGPASSWORD=
+PGSSLMODE=
+PGCHANNELBINDING=
 
 ✅ README with setup + architecture notes
 
